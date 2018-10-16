@@ -1,10 +1,32 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 6!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
-<p><a [routerLink]="['/login']">Logout</a></p>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click)="changeMonth(-1)">< Month</button>
+  <button type="button" class="btn btn-secondary" (click)="changeIndex(-5)">< 5 days</button>
+  <button type="button" class="btn btn-secondary" disabled>{{month}}</button>
+  <button type="button" class="btn btn-secondary" (click)="changeIndex(5)">5 days ></button>
+  <button type="button" class="btn btn-secondary" (click)="changeMonth(1)">Month ></button>
+</div>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Parking</th>
+      <th scope="col" *ngFor="let date of dates | slice:startIndex:endIndex">
+          {{date}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reservationDate of reservationDates">
+      <th scope="row">{{reservationDate.parking}}</th>
+      <td *ngFor="let rd of reservationDate.dates | slice:startIndex:endIndex">
+        <span >
+          <ng-container *ngIf="rd.reservationDate !== null">
+            <button class="btn btn-primary bg-danger" disabled>{{rd.userId}}</button>
+          </ng-container>
+          <ng-container *ngIf="rd.reservationDate === null">
+            <button (click)="reserve(rd.date,reservationDate.parking)" class="btn btn-primary bg-success">Reserve</button>
+          </ng-container>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

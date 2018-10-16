@@ -1,22 +1,23 @@
-﻿<!-- main app container -->
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 offset-sm-3">
-                <alert></alert>
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </div>
-</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<!-- credits
-<div class="text-center">
-    <p>
-        <a href="http://jasonwatmore.com/post/2018/05/16/angular-6-user-registration-and-login-example-tutorial" target="_top">Angular 6 User Registration and Login Example & Tutorial</a>
-    </p>
-    <p>
-        <a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-    </p>
-</div>
- -->
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="nav navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="parkings">Parkings</a></li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0" *ngIf="isLoggedIn()">
+      <button [routerLink]="['/login']" class="btn btn-outline-default my-2 my-sm-0" type="submit">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<main role="main" class="container-fluid">
+  <div class="starter-template">
+      <alert></alert>
+      <router-outlet></router-outlet>
+  </div>
+</main>
