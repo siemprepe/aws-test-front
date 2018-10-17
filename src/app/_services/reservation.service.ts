@@ -9,10 +9,14 @@ export class ReservationService {
     constructor(private http: HttpClient) { }
 
     getAll(date: string) {
-        return this.http.get<any[]>(`${environment.apiUrl}/reservations/`+date);
+      return this.http.get<any[]>(`${environment.apiUrl}/reservations/${date}`);
     }
 
     makeReservation(parking: string, date: string, user: string) {
-        return this.http.post(`${environment.apiUrl}/reservations`, {"parkingId": parking,"reservationDate":date,"userId": user});
+      return this.http.post(`${environment.apiUrl}/reservations`, {"parkingId": parking,"reservationDate":date,"userId": user});
+    }
+
+    deleteReservation(parking: string, date: string){
+      return this.http.delete<any[]>(`${environment.apiUrl}/reservations/${parking}/${date}`);
     }
 }

@@ -23,4 +23,8 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['./login']);
   }
 
+  hasRole(role){
+    return this.authenticationService.hasRole(role);
+  }
+
 }

@@ -7,7 +7,8 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="nav navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="parkings">Parkings</a></li>
+      <li class="nav-item" *ngIf="hasRole('ADMIN')"><a class="nav-link" routerLink="parkings">Parkings</a></li>
+      <li class="nav-item" *ngIf="hasRole('ADMIN')"><a class="nav-link" routerLink="reservations">Reservations</a></li>
     </ul>
     <div class="form-inline my-2 my-lg-0">
       <button (click)="logout()" class="btn btn-outline-default my-2 my-sm-0" *ngIf="isLoggedIn" type="submit">Logout</button>

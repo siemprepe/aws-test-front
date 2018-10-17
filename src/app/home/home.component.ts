@@ -3,6 +3,8 @@ import { first } from 'rxjs/operators';
 
 import { User, Parking, Reservation } from '../_models';
 import { UserService, ParkingsService, ReservationService, AlertService } from '../_services';
+import { ReservationConfirmModalComponent } from '../reservation-confirm-modal';
+import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({templateUrl: 'home.component.html'})
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit {
     constructor(private userService: UserService,
                 private reservationService: ReservationService,
                 private parkingsService: ParkingsService,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private modalService: NgbModal) {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.currentMonth = new Date().getMonth() + 1;
         this.currentYear = new Date().getFullYear();
@@ -89,21 +92,29 @@ export class HomeComponent implements OnInit {
       let dstr = this.currentYear + '-' + (this.currentMonth) + '-';
       this.dates = [];
       for(var i = this.currentDay ;i <= this.numberOfDays;i++){
-        this.dates.push(dstr + i);
+        this.dates.push(dstr + (i < 10 ? '0'+i:i));
       };
     }
 
     reserve(date: string, parking: string){
-      console.log("RESEREVED: " + date + " - " + parking);
-      this.reservationService.makeReservation(parking,date,this.currentUser.userId)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.loadAllReservations();
-              },
-              error => {
-                  this.alertService.error(error);
-              });
+      const modal = this.modalService.open(ReservationConfirmModalComponent)
+      modal.componentInstance.date = date
+      modal.componentInstance.parking = parking
+
+      modal.result.then((result) => {
+        console.log("Making reservation for " + this.currentUser.userId + " on " + date + " for " + parking)
+        this.reservationService.makeReservation(parking,date,this.currentUser.userId)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.loadAllReservations();
+                },
+                error => {
+                    this.alertService.error(error);
+                });
+      }, (reason) => {
+        console.log("confirm dialog closed")
+      });
     }
 
     private loadAllReservations(){
@@ -135,7 +146,6 @@ export class HomeComponent implements OnInit {
             });
             return t;
           });
-          //console.log(this.reservationDates);
       });
     }
 
