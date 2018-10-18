@@ -5,6 +5,7 @@ import { ParkingsComponent } from './parkings';
 import { ReservationsComponent } from './reservations';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { ActivationComponent } from './activation';
 import { AuthGuard, RoleGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -13,8 +14,7 @@ const appRoutes: Routes = [
     { path: RouteValues.RESERVATIONS.name, component: ReservationsComponent, canActivate: [RoleGuard], data: { expectedRole: Roles.ADMIN.value } },
     { path: RouteValues.LOGIN.name, component: LoginComponent },
     { path: RouteValues.REGISTER.name, component: RegisterComponent },
-
-    // otherwise redirect to home
+    { path: RouteValues.ACTIVATION.name, component: ActivationComponent },
     { path: '**', redirectTo: '' }
 ];
 

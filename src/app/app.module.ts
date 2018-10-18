@@ -17,6 +17,7 @@ import { ParkingsComponent } from './parkings';
 import { ReservationsComponent } from './reservations';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { ActivationComponent } from './activation';
 import { MenuComponent } from './menu';
 import { ReservationConfirmModalComponent } from './reservation-confirm-modal';
 import { ReservationDeleteModalComponent } from './reservation-delete-modal';
@@ -36,6 +37,7 @@ import { ReservationDeleteModalComponent } from './reservation-delete-modal';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        ActivationComponent,
         ParkingsComponent,
         ReservationsComponent,
         MenuComponent,

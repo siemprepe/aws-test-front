@@ -1,0 +1,12 @@
+<div *ngIf="complete">
+  <h2>Congratulations</h2>
+  <p>Your account has been activated</p>
+  <p>You can now login using the link below and start reserving parking spots</p>
+  <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+</div>
+<div *ngIf="!complete && !error">
+  <p>We are processing your activation request</p>
+</div>
+<div *ngIf="!complete && error">
+  <p>Something went wrong processing your activation</p>
+</div>

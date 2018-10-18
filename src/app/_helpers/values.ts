@@ -18,6 +18,10 @@ export const RouteValues = {
   HOME: {
     name: '',
     path: '/'
+  },
+  ACTIVATION: {
+    name: 'activation/:token',
+    path: './activation'
   }
 };
 

@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
       modal.componentInstance.parking = parking
 
       modal.result.then((result) => {
-        console.log(`Making reservation for ${this.currentUser.userId} on ${date} for ${parking}`;
+        console.log(`Making reservation for ${this.currentUser.userId} on ${date} for ${parking}`);
         this.reservationService.makeReservation(parking,date,this.currentUser.userId)
             .pipe(first())
             .subscribe(

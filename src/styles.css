@@ -1,9 +1,21 @@
+html{
+  background: url('assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
 body {
   height: 100%;
   padding-top: 5rem;
+  background-color: rgba(230, 23, 57, 0.53);
 }
 .template {
   text-align: center;
+}
+
+form{
+  background: #fff;
+    border-radius: 15px;
 }
 
 .form-signin {
