@@ -1,11 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
+import { MonthNames } from '../_helpers';
 import { User, Parking, Reservation } from '../_models';
 import { UserService, ParkingsService, ReservationService, AlertService } from '../_services';
 import { ReservationConfirmModalComponent } from '../reservation-confirm-modal';
-import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit {
@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
     numberOfDays: number;
     dates: string[];
     amountOfDays: number = 5;
-    monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     month: string;
     startIndex: number = 0;
     endIndex: number = 5;
@@ -38,12 +37,12 @@ export class HomeComponent implements OnInit {
         this.numberOfDays = this.getDaysInMonth(this.currentMonth , this.currentYear );
     }
 
+    //TODO: Clean this code up, can be nicer
     ngOnInit() {
         this.loadAllParkings();
         this.loadAllReservations();
-
         this.setDates();
-        this.month = this.monthNames[this.currentMonth-1];
+        this.month = MonthNames[this.currentMonth-1];
     }
 
     changeIndex(value){
@@ -82,7 +81,7 @@ export class HomeComponent implements OnInit {
         this.currentYear--
         this.currentMonth = 12
       }
-      this.month = this.monthNames[this.currentMonth-1];
+      this.month = MonthNames[this.currentMonth-1];
       this.numberOfDays = this.getDaysInMonth(this.currentMonth , this.currentYear );
       this.setDates();
       this.loadAllReservations();
@@ -102,7 +101,7 @@ export class HomeComponent implements OnInit {
       modal.componentInstance.parking = parking
 
       modal.result.then((result) => {
-        console.log("Making reservation for " + this.currentUser.userId + " on " + date + " for " + parking)
+        console.log(`Making reservation for ${this.currentUser.userId} on ${date} for ${parking}`;
         this.reservationService.makeReservation(parking,date,this.currentUser.userId)
             .pipe(first())
             .subscribe(

@@ -1,4 +1,10 @@
 <h2>Manage Reservations</h2>
+<div class="btn-group date-selector" role="group">
+  <button type="button" class="btn btn-secondary" (click)="changeMonth(-1)">< Month</button>
+  <button type="button" class="btn btn-secondary" disabled>{{month}} {{currentYear}}</button>
+  <button type="button" class="btn btn-secondary" (click)="changeMonth(1)">Month ></button>
+</div>
+
 <table class="table">
   <thead class="thead-light">
     <tr>
@@ -7,9 +13,15 @@
       <th scope="col">User</th>
       <th scope="col">Delete</th>
     </tr>
+    <tr>
+      <th scope="col" class="table-filter"><input type="text" id="parkingNameFilterId" [(ngModel)]="parkingNameFilter" name="parkingNameFilter" placeholder="Filter By Parking"></th>
+      <th scope="col" class="table-filter"><input type="text" id="parkingDateFilterId" [(ngModel)]="parkingDateFilter" name="parkingDateFilter" placeholder="Filter By Date"></th>
+      <th scope="col" class="table-filter"></th>
+      <th scope="col" class="table-filter"></th>
+    </tr>
   </thead>
-  <tbody *ngFor="let reservation of reservations">
-      <tr *ngFor="let date of reservation.dates">
+  <tbody *ngFor="let reservation of (reservations | reservationByParking: parkingNameFilter)">
+      <tr *ngFor="let date of (reservation.dates | reservationByDate: parkingDateFilter)">
         <th scope="row">{{reservation.parking}}</th>
         <td>{{date.date}}</td>
         <td>{{date.user}}</td>

@@ -32,7 +32,6 @@ export class ParkingsComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
-        // stop here if form is invalid
         if (this.addParkingForm.invalid) {
             return;
         }
@@ -51,7 +50,6 @@ export class ParkingsComponent implements OnInit {
                 });
     }
 
-    // convenience getter for easy access to form fields
     get f() { return this.addParkingForm.controls; }
 
     private loadAllParkings() {
@@ -61,6 +59,7 @@ export class ParkingsComponent implements OnInit {
       });
     }
 
+    //TODO: Double function from home, share
     private compareParking(parkingA, parkingB) {
       const nameA = parkingA.name.toUpperCase();
       const nameB = parkingB.name.toUpperCase();

@@ -55,3 +55,10 @@ body {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
+
+.date-selector{
+  margin-bottom: 0.5em;
+}
+.table-filter{
+  padding:0 !important;
+}

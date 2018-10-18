@@ -1,6 +1,6 @@
 ﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }  from './app.component';
@@ -10,7 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertComponent } from './_directives';
 import { AuthGuard, RoleGuard } from './_guards';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor, ErrorInterceptor, ReservationByParkingPipe, ReservationByDatePipe } from './_helpers';
 import { AlertService, AuthenticationService, UserService, ParkingsService, ReservationService } from './_services';
 import { HomeComponent } from './home';
 import { ParkingsComponent } from './parkings';
@@ -27,7 +27,8 @@ import { ReservationDeleteModalComponent } from './reservation-delete-modal';
         ReactiveFormsModule,
         HttpClientModule,
         routing,
-        NgbModule
+        NgbModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -39,7 +40,9 @@ import { ReservationDeleteModalComponent } from './reservation-delete-modal';
         ReservationsComponent,
         MenuComponent,
         ReservationConfirmModalComponent,
-        ReservationDeleteModalComponent
+        ReservationDeleteModalComponent,
+        ReservationByParkingPipe,
+        ReservationByDatePipe
     ],
     entryComponents: [
       ReservationConfirmModalComponent,
