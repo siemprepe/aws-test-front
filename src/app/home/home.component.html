@@ -1,12 +1,12 @@
 <div class="btn-group date-selector" role="group">
   <button type="button" class="btn btn-secondary" (click)="changeMonth(-1)">< Month</button>
   <button type="button" class="btn btn-secondary" (click)="changeIndex(-5)">< 5 days</button>
-  <button type="button" class="btn btn-secondary" disabled>{{month}}</button>
+  <button type="button" class="btn btn-dark disabled" disabled>{{month}}</button>
   <button type="button" class="btn btn-secondary" (click)="changeIndex(5)">5 days ></button>
   <button type="button" class="btn btn-secondary" (click)="changeMonth(1)">Month ></button>
 </div>
 
-<table class="table">
+<table class="table bg-white">
   <thead class="thead-light">
     <tr>
       <th scope="col">Parking</th>
