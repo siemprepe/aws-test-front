@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { decode } from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -40,10 +40,11 @@ export class AuthenticationService {
       const user = JSON.parse(sessionStorage.getItem('currentUser'));
       const token = user !== null ? user.token : null;
       try{
-        const tokenPayload = decode(token);
+        const tokenPayload = jwt_decode(token);
         return tokenPayload.roles !== null ? tokenPayload.roles.find(role => role === expectedRole) : true;
       }catch(err){
-        return true;
+        console.log(err);
+        return false;
       }
     }
 

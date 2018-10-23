@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import { ValidateEmailDomain } from '../_helpers';
 import { AlertService, UserService } from '../_services';
 
 @Component({templateUrl: 'register.component.html'})
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required, Validators.email, ValidateEmailDomain]],
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(7)]]
         });
