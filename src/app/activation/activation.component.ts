@@ -26,7 +26,7 @@ export class ActivationComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  this.alertService.success('Activation successful', true);
+                  this.alertService.success('Activation successful', false);
                   this.complete = true;
                   this.error = false;
               },

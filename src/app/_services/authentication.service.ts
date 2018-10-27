@@ -41,7 +41,7 @@ export class AuthenticationService {
       const token = user !== null ? user.token : null;
       try{
         const tokenPayload = jwt_decode(token);
-        return tokenPayload.roles !== null ? tokenPayload.roles.find(role => role === expectedRole) : true;
+        return tokenPayload.roles !== null ? tokenPayload.roles.split(';').find(role => role === expectedRole) : false;
       }catch(err){
         console.log(err);
         return false;
